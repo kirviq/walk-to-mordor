@@ -1,0 +1,351 @@
+<html>
+	<head>
+		<title>Walk to Mordor</title>
+		<style type="text/css">
+			/* <![CDATA[ */
+			.tile {
+				visibility: inherit;
+				opacity: 1;
+				position: absolute;
+				width: 256px;
+				height: 256px;
+			}
+			LABEL {
+				cursor: pointer;
+			}
+			/* ]]> */
+		</style>
+		<script type="text/javascript">
+			// <![CDATA[
+			const positions = [
+				{"x":  445, "y": 302.75},
+				{"x":  445.75, "y": 306},
+				{"x":  446.5, "y": 309},
+				{"x":  447.25, "y": 313},
+				{"x":  448, "y": 316.75},
+				{"x":  449, "y": 320},
+				{"x":  451, "y": 322.75},
+				{"x":  453, "y": 323.5},
+				{"x":  456.5, "y": 322.5},
+				{"x":  461, "y": 321},
+				{"x":  465.25, "y": 318.5},
+				{"x":  469.25, "y": 316},
+				{"x":  473.25, "y": 314.25},
+				{"x":  476, "y": 313},
+				{"x":  477.25, "y": 312},
+				{"x":  480.75, "y": 310},
+				{"x":  484, "y": 308.5},
+				{"x":  486.75, "y": 309.5},
+				{"x":  488, "y": 311},
+				{"x":  489, "y": 312.5},
+				{"x":  493.25, "y": 313.75},
+				{"x":  497, "y": 314.75},
+				{"x":  500.75, "y": 316},
+				{"x":  505.25, "y": 316.75},
+				{"x":  508, "y": 316.75},
+				{"x":  510.75, "y": 316.75},
+				{"x":  515, "y": 316.75},
+				{"x":  520, "y": 315.75},
+				{"x":  525, "y": 316.5},
+				{"x":  529, "y": 317.25},
+				{"x":  530.25, "y": 315.5},
+				{"x":  530.25, "y": 312.75},
+				{"x":  531, "y": 310},
+				{"x":  532, "y": 308},
+				{"x":  534, "y": 307},
+				{"x":  535.75, "y": 307},
+				{"x":  537.75, "y": 304.5},
+				{"x":  540, "y": 301.75},
+				{"x":  542.5, "y": 299},
+				{"x":  546.5, "y": 296.75},
+				{"x":  550.25, "y": 296},
+				{"x":  556, "y": 294.5},
+				{"x":  561, "y": 294.5},
+				{"x":  566.75, "y": 295.75},
+				{"x":  570, "y": 296.75},
+				{"x":  574.75, "y": 298.75},
+				{"x":  579.75, "y": 300.75},
+				{"x":  584, "y": 299.5},
+				{"x":  589, "y": 298.25},
+				{"x":  592, "y": 297.5},
+				{"x":  598, "y": 298.5},
+				{"x":  601.75, "y": 299.5},
+				{"x":  602, "y": 300},
+				{"x":  606.5, "y": 304},
+				{"x":  609.75, "y": 306.5},
+				{"x":  614, "y": 308.25},
+				{"x":  619.5, "y": 309.5},
+				{"x":  623.75, "y": 308.75},
+				{"x":  632, "y": 307},
+				{"x":  640, "y": 305},
+				{"x":  663, "y": 301},
+				{"x":  670.25, "y": 298.75},
+				{"x":  678, "y": 296.5},
+				{"x":  682, "y": 295.5},
+				{"x":  686, "y": 295.25},
+				{"x":  693.75, "y": 289.5},
+				{"x":  703.75, "y": 288},
+				{"x":  711.75, "y": 287.25},
+				{"x":  719, "y": 288.5},
+				{"x":  727.25, "y": 289.5},
+				{"x":  734, "y": 291},
+				{"x":  740.75, "y": 293.25},
+				{"x":  743.75, "y": 295},
+				{"x":  745.75, "y": 297.5},
+				{"x":  747, "y": 300.5},
+				{"x":  747.5, "y": 301.5},
+				{"x":  749.75, "y": 301.5},
+				{"x":  752.25, "y": 301.75},
+				{"x":  754, "y": 300.25},
+				{"x":  754.75, "y": 297.25},
+				{"x":  754.75, "y": 293.5},
+				{"x":  752.5, "y": 303.25},
+				{"x":  750.75, "y": 310.5},
+				{"x":  750.75, "y": 315},
+				{"x":  751.25, "y": 320.75},
+				{"x":  751.75, "y": 326.5},
+				{"x":  751.75, "y": 332.5},
+				{"x":  750, "y": 337.75},
+				{"x":  747.5, "y": 342.5},
+				{"x":  743, "y": 349},
+				{"x":  738, "y": 356.5},
+				{"x":  733, "y": 362.75},
+				{"x":  729.5, "y": 367.5},
+				{"x":  727.25, "y": 370.5},
+				{"x":  726.75, "y": 379.5},
+				{"x":  731.75, "y": 379.5},
+				{"x":  741.75, "y": 377},
+				{"x":  749.25, "y": 372.5},
+				{"x":  758.5, "y": 367.5},
+				{"x":  752.75, "y": 372},
+				{"x":  743, "y": 376},
+				{"x":  733.75, "y": 379.75},
+				{"x":  726.75, "y": 382},
+				{"x":  725, "y": 384.5},
+				{"x":  720.75, "y": 392.25},
+				{"x":  719, "y": 398},
+				{"x":  718.5, "y": 404.5},
+				{"x":  718.5, "y": 410.5},
+				{"x":  718.75, "y": 415.5},
+				{"x":  719.75, "y": 421},
+				{"x":  720.25, "y": 423.75},
+				{"x":  725.5, "y": 421},
+				{"x":  732, "y": 417.75},
+				{"x":  737, "y": 417},
+				{"x":  740, "y": 418.5},
+				{"x":  744, "y": 419},
+				{"x":  748.75, "y": 418.5},
+				{"x":  751, "y": 422.5},
+				{"x":  754.75, "y": 422},
+				{"x":  758.75, "y": 421.5},
+				{"x":  761.75, "y": 422.25},
+				{"x":  764.75, "y": 423.5},
+				{"x":  766.5, "y": 424.5},
+				{"x":  768.5, "y": 427.25},
+				{"x":  770.5, "y": 430},
+				{"x":  772, "y": 433.5},
+				{"x":  775.75, "y": 436.25},
+				{"x":  779.75, "y": 439.25},
+				{"x":  782.75, "y": 443},
+				{"x":  783.25, "y": 447},
+				{"x":  786.75, "y": 450.25},
+				{"x":  790.25, "y": 453.5},
+				{"x":  795.25, "y": 456.5},
+				{"x":  803, "y": 458.75},
+				{"x":  809.75, "y": 461},
+				{"x":  815.75, "y": 463.5},
+				{"x":  822.75, "y": 465.75},
+				{"x":  825.75, "y": 468},
+				{"x":  832.25, "y": 473.5},
+				{"x":  834, "y": 479.5},
+				{"x":  836, "y": 487},
+				{"x":  838, "y": 492.5},
+				{"x":  840.75, "y": 497.75},
+				{"x":  846.5, "y": 501.5},
+				{"x":  853.25, "y": 506.75},
+				{"x":  859, "y": 511.25},
+				{"x":  862.5, "y": 515.5},
+				{"x":  868.5, "y": 517.75},
+				{"x":  874.25, "y": 520},
+				{"x":  881, "y": 521.5},
+				{"x":  884.5, "y": 524.5},
+				{"x":  886.25, "y": 529.25},
+				{"x":  883.75, "y": 534},
+				{"x":  880.5, "y": 537.5},
+				{"x":  879.75, "y": 541.75},
+				{"x":  881.5, "y": 545},
+				{"x":  883.5, "y": 549.25},
+				{"x":  887.75, "y": 551.25},
+				{"x":  895.25, "y": 549.75},
+				{"x":  901.25, "y": 548},
+				{"x":  905.75, "y": 548.5},
+				{"x":  908.5, "y": 552},
+				{"x":  910, "y": 556},
+				{"x":  907, "y": 560.5},
+				{"x":  904, "y": 565.75},
+				{"x":  901, "y": 568.75},
+				{"x":  900, "y": 572.75},
+				{"x":  900.75, "y": 575.75},
+				{"x":  902.75, "y": 577},
+				{"x":  906, "y": 578},
+				{"x":  911.5, "y": 580.75},
+				{"x":  915.75, "y": 584},
+				{"x":  917, "y": 587.75},
+				{"x":  917, "y": 591.75},
+				{"x":  916.25, "y": 596},
+				{"x":  914.25, "y": 598.75},
+				{"x":  912.5, "y": 604.25},
+				{"x":  910.25, "y": 607},
+				{"x":  907, "y": 616.25},
+				{"x":  906.75, "y": 620.75},
+				{"x":  907, "y": 624.5},
+				{"x":  907, "y": 627.75},
+				{"x":  907, "y": 632.25},
+				{"x":  908.5, "y": 637.5},
+				{"x":  910.25, "y": 641.75},
+				{"x":  912, "y": 647.75},
+				{"x":  913, "y": 652.75},
+				{"x":  914, "y": 660.75},
+				{"x":  914, "y": 665.5},
+				{"x":  913.75, "y": 667.5},
+				{"x":  911.25, "y": 665},
+				{"x":  921.5, "y": 660.5},
+				{"x":  923.75, "y": 655.75},
+				{"x":  926.25, "y": 651.5},
+				{"x":  930.25, "y": 649.25},
+				{"x":  932.25, "y": 647.75},
+				{"x":  938, "y": 645.5},
+				{"x":  942, "y": 644.25},
+				{"x":  949.5, "y": 642.5},
+				{"x":  961, "y": 641.75},
+				{"x":  965.25, "y": 643},
+				{"x":  969.25, "y": 644.5},
+				{"x":  975, "y": 648.5},
+				{"x":  982.5, "y": 653},
+				{"x":  988.75, "y": 656.5},
+				{"x":  996, "y": 659.75},
+				{"x":  1003.25, "y": 664},
+				{"x":  1009, "y": 666.75},
+				{"x":  1010.5, "y": 667.25},
+				{"x":  1005.25, "y": 671.5},
+				{"x":  1000.75, "y": 676},
+				{"x":  999.25, "y": 679.5},
+				{"x":  997.5, "y": 686},
+				{"x":  996.25, "y": 691.5},
+				{"x":  995.5, "y": 695.5},
+				{"x":  995.5, "y": 700.75},
+				{"x":  995, "y": 705},
+				{"x":  995, "y": 711.5},
+				{"x":  996, "y": 718},
+				{"x":  995, "y": 722.5},
+				{"x":  997.5, "y": 728.25},
+				{"x":  1000, "y": 735.5},
+				{"x":  1002, "y": 741.75},
+				{"x":  1003.75, "y": 749.5},
+				{"x":  1005.25, "y": 754.5},
+				{"x":  1006, "y": 760},
+				{"x":  1011.5, "y": 764},
+				{"x":  1013.75, "y": 765.5},
+				{"x":  1020, "y": 764.25},
+				{"x":  1023.25, "y": 763.25},
+				{"x":  1027.25, "y": 760.5},
+				{"x":  1033.5, "y": 760.25},
+				{"x":  1038.25, "y": 760.5},
+				{"x":  1043, "y": 763.5},
+				{"x":  1048.25, "y": 764.25},
+				{"x":  1051.75, "y": 764.25},
+				{"x":  1050, "y": 756.5},
+				{"x":  1048.75, "y": 747.25},
+				{"x":  1048, "y": 736.75},
+				{"x":  1048, "y": 726.75},
+				{"x":  1046.5, "y": 720.25},
+				{"x":  1041.25, "y": 717},
+				{"x":  1034.75, "y": 715},
+				{"x":  1039.5, "y": 713.5},
+				{"x":  1044.25, "y": 711.5},
+				{"x":  1048, "y": 709.5},
+				{"x":  1054.5, "y": 700},
+				{"x":  1063.5, "y": 697.25},
+				{"x":  1074, "y": 698.75},
+				{"x":  1078.75, "y": 698.25},
+				{"x":  1086.25, "y": 698.25},
+				{"x":  1086.5, "y": 699.25},
+				{"x":  1085, "y": 705.5},
+				{"x":  1085.5, "y": 711},
+				{"x":  1085.5, "y": 714.25},
+				{"x":  1086.5, "y": 721},
+				{"x":  1087.75, "y": 726.5},
+				{"x":  1088.5, "y": 730.5}];
+			const pixelToKm = 2.06266;
+			function drawPath(untilKm) {
+				let dist = 0;
+				const points = [];
+				let lastPos = null;
+				for (const pos of positions) {
+					if (lastPos) {
+						dist += Math.sqrt(Math.pow(Math.abs(lastPos.x - pos.x), 2) + Math.pow(Math.abs(lastPos.y - pos.y), 2)) * pixelToKm;
+					}
+					if (dist > untilKm) {
+						break;
+					}
+					lastPos = pos;
+					points.push(`${pos.x}, ${pos.y}`);
+				}
+				document.getElementById('pathline').setAttribute('points', points.join(', '));
+			}
+
+			function updatePath() {
+				const walked = document.getElementById('km').value;
+				drawPath(walked)
+			}
+			document.addEventListener('DOMContentLoaded', updatePath, false);
+			document.getElementById('km').addEventListener('keyup', updatePath, false);
+			document.getElementById('km').addEventListener('change', updatePath, false);
+			// ]]>
+		</script>
+	</head>
+	<body>
+		<label for="km">Gelaufene km</label><input id="km" type="number" value="2863" />
+		<div id="outer-map" style="position: relative;">
+			<div id="map" style="height: 831px;">
+				<img src="meincludes/tiles/3/2/3.jpg" class="tile" style="left: 512px; top: 234px;" />
+				<img src="meincludes/tiles/3/3/3.jpg" class="tile" style="left: 768px; top: 234px;" />
+				<img src="meincludes/tiles/3/2/2.jpg" class="tile" style="left: 512px; top: 490px;" />
+				<img src="meincludes/tiles/3/3/2.jpg" class="tile" style="left: 768px; top: 490px;" />
+				<img src="meincludes/tiles/3/2/4.jpg" class="tile" style="left: 512px; top: -22px;" />
+				<img src="meincludes/tiles/3/3/4.jpg" class="tile" style="left: 768px; top: -22px;" />
+				<img src="meincludes/tiles/3/1/3.jpg" class="tile" style="left: 256px; top: 234px;" />
+				<img src="meincludes/tiles/3/4/3.jpg" class="tile" style="left: 1024px; top: 234px;" />
+				<img src="meincludes/tiles/3/1/2.jpg" class="tile" style="left: 256px; top: 490px;" />
+				<img src="meincludes/tiles/3/4/2.jpg" class="tile" style="left: 1024px; top: 490px;" />
+				<img src="meincludes/tiles/3/2/1.jpg" class="tile" style="left: 512px; top: 746px;" />
+				<img src="meincludes/tiles/3/1/4.jpg" class="tile" style="left: 256px; top: -22px;" />
+				<img src="meincludes/tiles/3/3/1.jpg" class="tile" style="left: 768px; top: 746px;" />
+				<img src="meincludes/tiles/3/4/4.jpg" class="tile" style="left: 1024px; top: -22px;" />
+				<img src="meincludes/tiles/3/1/1.jpg" class="tile" style="left: 256px; top: 746px;" />
+				<img src="meincludes/tiles/3/4/1.jpg" class="tile" style="left: 1024px; top: 746px;" />
+				<img src="meincludes/tiles/3/0/3.jpg" class="tile" style="left: 0; top: 234px;" />
+				<img src="meincludes/tiles/3/0/2.jpg" class="tile" style="left: 0; top: 490px;" />
+				<img src="meincludes/tiles/3/5/3.jpg" class="tile" style="left: 1280px; top: 234px;" />
+				<img src="meincludes/tiles/3/5/2.jpg" class="tile" style="left: 1280px; top: 490px;" />
+				<img src="meincludes/tiles/3/0/4.jpg" class="tile" style="left: 0; top: -22px;" />
+				<img src="meincludes/tiles/3/2/0.jpg" class="tile" style="left: 512px; top: 1002px;" />
+				<img src="meincludes/tiles/3/5/4.jpg" class="tile" style="left: 1280px; top: -22px;" />
+				<img src="meincludes/tiles/3/3/0.jpg" class="tile" style="left: 768px; top: 1002px;" />
+				<img src="meincludes/tiles/3/0/1.jpg" class="tile" style="left: 0; top: 746px;" />
+				<img src="meincludes/tiles/3/5/1.jpg" class="tile" style="left: 1280px; top: 746px;" />
+				<img src="meincludes/tiles/3/1/0.jpg" class="tile" style="left: 256px; top: 1002px;" />
+				<img src="meincludes/tiles/3/4/0.jpg" class="tile" style="left: 1024px; top: 1002px;" />
+				<img src="meincludes/tiles/3/0/0.jpg" class="tile" style="left: 0; top: 1002px;" />
+				<img src="meincludes/tiles/3/5/0.jpg" class="tile" style="left: 1280px; top: 1002px;" />
+			</div>
+			<div id="path" style="position: absolute; width: 100%; height: 100%; z-index: 330; left: 0; top: 0; display: block;">
+				<svg width="1920" height="831" viewBox="0 0 1920 831" style="display: block;">
+					<polyline id="pathline" points="" fill="none" stroke="blue" stroke-opacity="1" stroke-width="3" stroke-linecap="round"
+					          stroke-linejoin="round">
+					</polyline>
+				</svg>
+			</div>
+		</div>
+	</body>
+</html>
