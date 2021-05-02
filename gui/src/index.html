@@ -298,10 +298,12 @@
 
 			function updatePath() {
 				const walked = document.getElementById('km').value;
+				localStorage['walked-km'] = walked;
 				drawPath(walked)
 			}
 
 			document.addEventListener('DOMContentLoaded', () => {
+				document.getElementById('km').value = localStorage['walked-km'] || 2863;
 				updatePath();
 				document.getElementById('km').addEventListener('keyup', updatePath, false);
 				document.getElementById('km').addEventListener('change', updatePath, false);
@@ -310,7 +312,7 @@
 		</script>
 	</head>
 	<body>
-		<label for="km">Gelaufene km</label><input id="km" type="number" value="2863"/>
+		<label for="km">Gelaufene km</label><input id="km" type="number" />
 		<div id="outer-map" style="position: relative;">
 			<div id="map" style="height: 831px;">
 				<img src="meincludes/tiles/3/0/4.jpg" class="tile" style="left: 0; top: 0;"/>
