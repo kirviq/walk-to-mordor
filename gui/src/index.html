@@ -312,8 +312,10 @@
 		</script>
 	</head>
 	<body>
-		<label for="km">Gelaufene km</label><input id="km" type="number" />
-		<div id="outer-map" style="position: relative;">
+		<div style="position: fixed; z-index:1; background-color:white">
+			<label for="km">Gelaufene km</label><input id="km" type="number" />
+		</div>
+		<div id="outer-map" style="position: relative; z-index:0">
 			<div id="map" style="height: 831px;">
 				<img src="meincludes/tiles/4/0/9.jpg"   class="tile" style="left: 0px; top: 0px; width: 128px; height: 128px">
 				<img src="meincludes/tiles/4/1/9.jpg"   class="tile" style="left: 128px; top: 0px; width: 128px; height: 128px">
