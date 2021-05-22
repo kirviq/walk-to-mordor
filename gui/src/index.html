@@ -277,42 +277,40 @@
 				{"x": 1086.5, "y": 743, "d": 2864},
 				{"x": 1087.75, "y": 748.5},
 				{"x": 1088.5, "y": 752.5, "d": 2870}];
-			const pixelToKm = 2.06266;
 
 			function drawPath(untilKm) {
-				let dist = 0;
-				let givDist = 0;
+				let distInPx = 0;
+				let distInKm = 0;
 				const points = [];
 				let lastPos = null;
-				let lastDist = 0;
-				let lastGivDist = 0;
+				let lastDistInPx = 0;
+				let lastGivDistKm = 0;
 				let lastSectionIndex = 0;
 
-				for (var i = 0; i < positions.length; i++) {
+				for (let i = 0; i < positions.length; i++) {
 					const pos = positions[i];
 					if (lastPos) {
-						dist += Math.sqrt(Math.pow(Math.abs(lastPos.x - pos.x), 2) + Math.pow(Math.abs(lastPos.y - pos.y), 2)) * pixelToKm;
+						distInPx += Math.sqrt(Math.pow(Math.abs(lastPos.x - pos.x), 2) + Math.pow(Math.abs(lastPos.y - pos.y), 2));
 					}
 					lastPos = pos;
 
-					if (pos.d != undefined) {
+					if (pos.d) {
 						console.log(pos.d);
-						givDist = pos.d;
-						let weight = (givDist - lastGivDist)/(dist - lastDist);
-						dist = lastDist;
-						for (var j = lastSectionIndex + 1; j <= i; j++) {
+						const weight = (pos.d - lastGivDistKm)/(distInPx - lastDistInPx);
+						distInKm = lastGivDistKm;
+						for (let j = lastSectionIndex + 1; j <= i; j++) {
 							const pos2 = positions[j];
 							const lastPos2 = positions[j-1];
-							dist += Math.sqrt(Math.pow(Math.abs(lastPos2.x - pos2.x), 2) + Math.pow(Math.abs(lastPos2.y - pos2.y), 2)) * pixelToKm * weight;
-							if (Math.round(dist) > untilKm) {
+							distInKm += Math.sqrt(Math.pow(Math.abs(lastPos2.x - pos2.x), 2) + Math.pow(Math.abs(lastPos2.y - pos2.y), 2)) * weight;
+							if (Math.round(distInKm) > untilKm) {
 								break;
 							} else {
 								points.push(`${pos2.x}, ${pos2.y}`);
 							}
 						}
 						lastSectionIndex = i;
-						lastGivDist = pos.d;
-						lastDist = dist;
+						lastGivDistKm = pos.d;
+						lastDistInPx = distInPx;
 					}
 				}
 				document.getElementById('pathline').setAttribute('points', points.join(', '));
